@@ -46,7 +46,7 @@ class _SecondPageState extends State<SecondPage> {
           children:<Widget> [
 
             Padding(
-              padding: const EdgeInsets.only(top: 200.0),
+              padding: const EdgeInsets.only(top: 180.0),
 
             ),
 
