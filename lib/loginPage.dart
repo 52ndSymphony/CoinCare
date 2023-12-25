@@ -481,7 +481,7 @@ class _ThirdPageState extends State<ThirdPage> {
                             icon: Icon(Icons.key_outlined),
                             // hintText: "Enter Email",
                             enabledBorder:  OutlineInputBorder(
-                              borderRadius:  BorderRadius.circular(20.0),
+                              borderRadius:  BorderRadius.circular(25.0),
                               borderSide:  BorderSide(color: Colors.orange,width: 4
                               ),
 
