@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 
 class SecondPage extends StatefulWidget {
@@ -14,6 +15,29 @@ class _SecondPageState extends State<SecondPage> {
 
   var userController = TextEditingController();
   var passwordController = TextEditingController();
+  void signUserIn() async {
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    try {
+      print('Hello');
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: userController.text,
+        password: passwordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+
+    }
+  }
   bool crossVisible1 = false;
   bool crossVisible2 = false;
   bool _isHidden=true;
@@ -51,15 +75,6 @@ class _SecondPageState extends State<SecondPage> {
 
             ),
 
-            // Expanded(
-            //   flex: 2,
-            //   child: ListView(
-            //     children: [Column(
-            //       crossAxisAlignment: CrossAxisAlignment.stretch,
-            //       children: bookList.map((book) => BookCard(book: book)).toList(),
-            //     ),]
-            //   ),
-            // ),
 
             Container(
               height: 250,
@@ -195,31 +210,11 @@ class _SecondPageState extends State<SecondPage> {
 
                       Expanded(
                         flex: 1,
-                        child: ElevatedButton.icon(
+                        child: TextButton.icon(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               setState(() {
-
-                                 Navigator.push(
-                                    context, MaterialPageRoute(builder: (_) => fourthPage()));
-
-
-                                //bookList.insert(0, Book(bookName: bookController.text, bookAuthor: authorController.text));
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      backgroundColor: Color.fromARGB(200, 255, 187, 119),
-                                      duration: Duration(seconds: 2),
-                                      content: Column(
-                                        children: [
-                                          Text('Hello User!!',style: TextStyle(color: Colors.black),),
-                                          Text('I am your Personal Financial Manager!',style: TextStyle(color: Colors.black),),
-
-                                        ],
-                                      ),
-
-                                    )
-
-                                );
+                                signUserIn();
 
                               });
                             }
