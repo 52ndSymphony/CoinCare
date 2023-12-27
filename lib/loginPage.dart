@@ -1,3 +1,4 @@
+import 'package:coincare/forgotPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -235,9 +236,17 @@ class _SecondPageState extends State<SecondPage> {
                           ),
 
                         ),
-
-
                       ),
+                      
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: TextButton(onPressed: () {
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ForgotPassWordScreen())
+                          );
+                        },
+                            child: Text('Forgot Password?', style: TextStyle(color: Colors.orange, fontSize: 15),)),
+                        ),
                       SizedBox(
                         height: 20,
                       ),
