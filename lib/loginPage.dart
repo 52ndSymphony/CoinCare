@@ -1,6 +1,7 @@
 import 'package:coincare/forgotPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'home.dart';
 
 
 
@@ -16,29 +17,8 @@ class _SecondPageState extends State<SecondPage> {
 
   var userController = TextEditingController();
   var passwordController = TextEditingController();
-  void signUserIn() async {
 
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
 
-    try {
-      print('Hello');
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: userController.text,
-        password: passwordController.text,
-      );
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
-
-    }
-  }
   bool crossVisible1 = false;
   bool crossVisible2 = false;
   bool _isHidden=true;
@@ -211,11 +191,12 @@ class _SecondPageState extends State<SecondPage> {
 
                       Expanded(
                         flex: 1,
-                        child: TextButton.icon(
+                        child: ElevatedButton.icon(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
                               setState(() {
-                                signUserIn();
+                                Navigator.push(
+                                    context, MaterialPageRoute(builder: (_) => fourthPage()));
 
                               });
                             }
