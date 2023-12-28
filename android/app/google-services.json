@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "950601656664",
+    "project_id": "hello-b4f89",
+    "storage_bucket": "hello-b4f89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950601656664:android:cedb3eef59871922a21d2d",
+        "android_client_info": {
+          "package_name": "com.example.coincare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu1xpGYs_g6ldQKHtyog7r3OApLnyg7UQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
