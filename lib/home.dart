@@ -7,7 +7,7 @@ class fourthPage extends StatelessWidget{
     return Scaffold(
       appBar: PreferredSize(
 
-          preferredSize: const Size.fromHeight(120.0), // here the desired height
+          preferredSize: const Size.fromHeight(110.0), // here the desired height
           child: AppBar(
             toolbarHeight: 220,
             title: const Text(
