@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
-class fourthPage extends StatelessWidget{
+import 'package:firebase_auth/firebase_auth.dart';
+class HomePage extends StatelessWidget{
 
+  HomePage({super.key});
+  final user = FirebaseAuth.instance.currentUser!;
+  //sign user out
+  void signUserOut(){
+    try{
+      FirebaseAuth.instance.signOut();
+    }on FirebaseAuthException catch(e){
 
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
 
+
           preferredSize: const Size.fromHeight(110.0), // here the desired height
           child: AppBar(
+            actions: [
+              IconButton(
+                  onPressed: signUserOut, icon: Icon(Icons.logout))],
             toolbarHeight: 220,
             title: const Text(
                 'Home',
