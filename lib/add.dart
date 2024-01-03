@@ -323,7 +323,7 @@ class _Add_ScreenState extends State<Add_Screen> {
           ),
           child: Column(
             children: [
-              SizedBox(height: 40),
+              SizedBox(height: 42),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
