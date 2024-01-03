@@ -145,7 +145,7 @@ class HomePage extends StatelessWidget{
                             Text(
                               titles[index],
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 21,
                                 fontWeight: FontWeight.bold,
                               ),
                             )
