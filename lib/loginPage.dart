@@ -129,7 +129,7 @@ class _SecondPageState extends State<SecondPage> {
                               borderSide: BorderSide(color: Colors.orange,width: 5),
                             ),
                             label: Text(
-                              'Enter Username',
+                              'Enter Username or email',
                               style: TextStyle(fontSize: 20,color: Colors.black),
                             ),
                             filled: true,
