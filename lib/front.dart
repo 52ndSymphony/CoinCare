@@ -82,7 +82,7 @@ Widget _head() {
             width: double.infinity,
             height: 240,
             decoration: BoxDecoration(
-              color: Color(0xff368983),
+              color: Colors.amber[600],
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -117,14 +117,14 @@ Widget _head() {
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 16,
-                          color: Color.fromARGB(255, 224, 223, 223),
+                          color: Colors.white,
                         ),
                       ),
                       Text(
-                        'Random',
+                        'Asif Avaas',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 20,
+                          fontSize: 30,
                           color: Colors.white,
                         ),
                       ),
@@ -143,15 +143,8 @@ Widget _head() {
           height: 170,
           width: 320,
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(47, 125, 121, 0.3),
-                offset: Offset(0, 6),
-                blurRadius: 12,
-                spreadRadius: 6,
-              ),
-            ],
-            color: Color.fromARGB(255, 47, 125, 121),
+
+            color: Colors.orange[400],
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
@@ -203,7 +196,7 @@ Widget _head() {
                       children: [
                         CircleAvatar(
                           radius: 13,
-                          backgroundColor: Color.fromARGB(255, 85, 145, 141),
+                          backgroundColor: Color.fromARGB(255, 120, 189, 209),
                           child: Icon(
                             Icons.arrow_downward,
                             color: Colors.white,
@@ -216,7 +209,7 @@ Widget _head() {
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
-                            color: Color.fromARGB(255, 216, 216, 216),
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -225,7 +218,7 @@ Widget _head() {
                       children: [
                         CircleAvatar(
                           radius: 13,
-                          backgroundColor: Color.fromARGB(255, 85, 145, 141),
+                          backgroundColor: Color.fromARGB(255, 120, 189, 209),
                           child: Icon(
                             Icons.arrow_upward,
                             color: Colors.white,
@@ -238,7 +231,7 @@ Widget _head() {
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
-                            color: Color.fromARGB(255, 216, 216, 216),
+                            color: Colors.white,
                           ),
                         ),
                       ],

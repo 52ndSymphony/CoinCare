@@ -22,7 +22,7 @@ class _BottomState extends State<Bottom> {
 
         },
         child: Icon(Icons.add),
-        backgroundColor: Colors.amberAccent,
+        backgroundColor: Color.fromARGB(255, 255, 204, 0),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -41,7 +41,7 @@ class _BottomState extends State<Bottom> {
                 child: Icon(
                   Icons.home,
                   size: 30,
-                  color: index_color == 0 ? Color(0xff368983) : Colors.grey,
+                  color: index_color == 0 ? Color.fromARGB(255, 251, 132, 0) : Colors.grey,
                 ),
               ),
               SizedBox(width: 6),
@@ -54,7 +54,7 @@ class _BottomState extends State<Bottom> {
                 child: Icon(
                   Icons.bar_chart_outlined,
                   size: 30,
-                  color: index_color == 1 ? Color(0xff368983) : Colors.grey,
+                  color: index_color == 1 ? Color.fromARGB(255, 255, 132, 0): Colors.grey,
                 ),
               ),
 
