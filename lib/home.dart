@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'bottomnavigationbar.dart';
 class HomePage extends StatelessWidget{
 
   HomePage({super.key});
@@ -45,7 +46,12 @@ class HomePage extends StatelessWidget{
               Column(
                 children: <Widget>[
                   Image.asset('assets/stat 2.jpg', height: 150.0,fit: BoxFit.cover),
-                  TextButton.icon(onPressed: () {}, icon: Icon(Icons.access_time_filled_sharp), label: Text('Statistics')),
+                  TextButton.icon(onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Bottom()),
+                    );
+                  }, icon: Icon(Icons.access_time_filled_sharp), label: Text('Statistics')),
                 ],
               ),
               Column(
