@@ -28,10 +28,7 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      /*appBar: AppBar(
-        title: Text('Logo Page'),
-        backgroundColor: Color.fromARGB(235, 0, 255, 42),
-      ),*/
+
       body: Center(
 
           child: Image.asset(
