@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Don\' have an account?',
+                          'Don\'t have an account?',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'signika',
