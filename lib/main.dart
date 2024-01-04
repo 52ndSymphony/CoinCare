@@ -1,8 +1,7 @@
-import 'package:coincare/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'loginPage.dart';
+import 'firebase_options.dart';
 
 
 void main() async{
@@ -10,18 +9,46 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-
+    return MaterialApp(
+      home: FirstPage(),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
     );
   }
 }
 
+class FirstPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      /*appBar: AppBar(
+        title: Text('Logo Page'),
+        backgroundColor: Color.fromARGB(235, 0, 255, 42),
+      ),*/
+      body: Center(
+
+          child: Image.asset(
+              'assets/firstpage.jpg',
+            width: 500.0,
+              height: 500.0,
+
+          ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SecondPage()),
+          );
+        },
+        child: Icon(Icons.arrow_forward),
+      ),
+    );
+  }
+}
