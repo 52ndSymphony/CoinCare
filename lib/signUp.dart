@@ -100,9 +100,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   const SizedBox(height: 15,),
 
-
-
-
                   Mytextfield(
                     controller: emailController,
                     hintText: 'Username/Email',
