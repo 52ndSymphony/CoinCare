@@ -1,3 +1,4 @@
+import 'package:coincare/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'loginPage.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirstPage(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -40,15 +41,7 @@ class FirstPage extends StatelessWidget {
 
           ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SecondPage()),
-          );
-        },
-        child: Icon(Icons.arrow_forward),
-      ),
+
     );
   }
 }
