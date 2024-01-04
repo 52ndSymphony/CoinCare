@@ -342,7 +342,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20.0),
+
+                      const SizedBox(height: 50,),
                       Expanded(
 
                         child: MyButton(

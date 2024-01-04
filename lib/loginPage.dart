@@ -43,7 +43,7 @@ class _SecondPageState extends State<SecondPage> {
   bool _isHidden=true;
 
   final formKey = GlobalKey<FormState>();
-  //List<Book> bookList = [];
+
 
 
   @override
@@ -111,7 +111,7 @@ class _SecondPageState extends State<SecondPage> {
 
                           validator: (value) {
                             if (value!.trim().isEmpty) {
-                              return 'Please enter your username !';
+                              return 'Please enter your username';
                             } else
                               return null;
                           },
@@ -220,11 +220,7 @@ class _SecondPageState extends State<SecondPage> {
                         height: 20,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context, MaterialPageRoute(builder: (_) =>RegisterPage(ontap: widget.ontap)));   },
-
-
+                        onTap: widget.ontap,
                         child: Text( 'New User? Create an account' ,style: TextStyle(color: Colors.orange, fontSize: 15),),
                       )
                     ]
