@@ -35,6 +35,15 @@ class HomePage extends StatelessWidget {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
+
+      floatingActionButton: FloatingActionButton(
+
+        onPressed: signUserOut,
+        child: Icon(Icons.account_circle_outlined,color: Colors.white),
+        backgroundColor: Colors.deepOrange,
+
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
       body: Container(
         color: Colors.amber,
         child: Column(
@@ -63,16 +72,7 @@ class HomePage extends StatelessWidget {
                             size: 40,
                           ),
                         ),
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.white,
-                            image: DecorationImage(
-                                image: AssetImage("assets/woman.png")),
-                          ),
-                        )
+
                       ],
                     ),
                   ),

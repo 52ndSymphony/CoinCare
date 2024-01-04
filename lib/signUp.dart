@@ -1,4 +1,5 @@
 import 'package:coincare/button.dart';
+import 'package:coincare/loginorregisterpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
@@ -50,12 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
       //ErrorShowMessage(context, e.code);
     }
   }
-  void goToPrevPage(){
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>  LoginPage(ontap: widget.ontap),
-    ));
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +63,13 @@ class _RegisterPageState extends State<RegisterPage> {
           child: AppBar(
             actions: [
               IconButton(
-                  onPressed: goToPrevPage, icon: Icon(Icons.account_circle_outlined),color: Colors.white,)],
+                  onPressed : (){
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                        builder: (context) => LoginOrRegistered(),
+                    ));
+                  }, icon: Icon(Icons.account_circle_outlined),color: Colors.white,)],
 
             toolbarHeight: 220,
             title: const Text(
