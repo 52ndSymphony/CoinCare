@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget{
             toolbarHeight: 220,
             title: const Text(
                 'Home',
-                style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500,color: Colors.white)
+                style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500,color: Colors.white,fontFamily: 'signika')
             ),
             centerTitle: true,
             backgroundColor: Colors.deepOrange,
