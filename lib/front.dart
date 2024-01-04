@@ -82,7 +82,7 @@ Widget _head() {
             width: double.infinity,
             height: 240,
             decoration: BoxDecoration(
-              color: Colors.amber[600],
+              color: Colors.amber,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -143,8 +143,15 @@ Widget _head() {
           height: 170,
           width: 320,
           decoration: BoxDecoration(
-
-            color: Colors.orange[400],
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black38,
+                offset: Offset(0, 6),
+                blurRadius: 12,
+                spreadRadius: 6,
+              ),
+            ],
+            color: Colors.amberAccent[700],
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
