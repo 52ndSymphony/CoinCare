@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
 
         onPressed: signUserOut,
-        child: Icon(Icons.account_circle_outlined,color: Colors.white),
+        child: Icon(Icons.logout,color: Colors.white),
         backgroundColor: Colors.deepOrange,
 
       ),

@@ -10,7 +10,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var history;
-  //final box = Hive.box<Add_data>('data');
+
   final List<String> day = [
     'Monday',
     "Tuesday",
@@ -55,15 +55,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                  //history = box.values.toList()[index]; // Assuming box is accessible here
-                  //return getList(history, index);
-                },
-                //childCount: box.length, // Assuming box length is accessible here
-              ),
-            )
+
           ],
         ),
       ),
