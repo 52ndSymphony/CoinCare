@@ -1,10 +1,12 @@
+import 'package:coincare/Firestore/user_model.dart';
+import 'package:coincare/Firestore/user_repository.dart';
 import 'package:coincare/button.dart';
 import 'package:coincare/loginorregisterpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'loginPage.dart';
 import 'my_text.dart';
-
+import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
 
@@ -21,6 +23,13 @@ class _RegisterPageState extends State<RegisterPage> {
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
   var confirmPassController = TextEditingController();
+
+  final userRepo= Get.put(UserRepository());
+
+  Future<void> creatUser(UserModel user) async {
+    await userRepo.creatUser(user);
+  }
+
 
 
   void signUserUp() async {
@@ -50,6 +59,13 @@ class _RegisterPageState extends State<RegisterPage> {
       Navigator.pop(context);
       //ErrorShowMessage(context, e.code);
     }
+
+    final user= UserModel(
+          Username: nameController.text.trim(),
+          email: emailController.text.trim(),
+    );
+    creatUser(user);
+
   }
 
   @override
@@ -134,7 +150,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   MyButton(
                     text: 'Sign Up',
                     onTap: signUserUp,
-
                   ),
 
                   const SizedBox(height: 25,),
@@ -149,4 +164,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
+
+
 

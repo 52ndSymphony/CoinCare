@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'statistics.dart';
-import 'bottomnavigationbar.dart';
+import 'Statistics page/statistics.dart';
+import 'Statistics page/bottomnavigationbar.dart';
 
 class HomePage extends StatelessWidget {
   var height, width;
