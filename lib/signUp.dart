@@ -1,6 +1,9 @@
+import 'package:coincare/Firestore/user_model.dart';
+import 'package:coincare/Firestore/user_repository.dart';
 import 'package:coincare/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'loginorregisterpage.dart';
 
 
@@ -24,6 +27,11 @@ class _RegisterPageState extends State<RegisterPage> {
   bool crossVisible3 = false;
   bool crossVisible4 = false;
 
+  final userRepo= Get.put(UserRepository());
+
+  Future<void> creatUser(UserModel user) async {
+     await userRepo.creatUser(user);
+  }
 
   void signUserUp() async {
     showDialog(
@@ -52,6 +60,12 @@ class _RegisterPageState extends State<RegisterPage> {
       Navigator.pop(context);
       //ErrorShowMessage(context, e.code);
     }
+    final user=UserModel(
+      Username: nameController.text.trim(),
+      email: emailController.text.trim(),
+    );
+    creatUser(user);
+
   }
 
   @override

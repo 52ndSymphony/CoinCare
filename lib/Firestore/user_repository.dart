@@ -12,7 +12,7 @@ class UserRepository extends GetxController{
 
 
     creatUser(UserModel user) async {
-       await _db.collection("Users").add(user.toJson())
+       await _db.collection("UserData").add(user.toJson())
        .whenComplete(
                () => Get.snackbar("success", "Your account is created",
                snackPosition: SnackPosition.BOTTOM,
@@ -20,8 +20,7 @@ class UserRepository extends GetxController{
        )
            .catchError(
       (error) {
-      // Error handling
-      // Display error snackbar
+
       Get.snackbar(
       "Error",
       error.toString(), // Displaying the error message
