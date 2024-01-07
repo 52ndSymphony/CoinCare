@@ -1,5 +1,6 @@
 import 'package:coincare/Firestore/user_model.dart';
 import 'package:coincare/Firestore/user_repository.dart';
+import 'package:coincare/auth_service.dart';
 import 'package:coincare/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,8 @@ class _RegisterPageState extends State<RegisterPage> {
      await userRepo.creatUser(user);
   }
 
-  void signUserUp() async {
+  void signUserUp(BuildContext context) async {
+    final auth=AuthService();
     showDialog(
       context: context,
       builder: (context) {
@@ -45,9 +47,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
     try {
       if (passwordController.text == confirmPassController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
+        await auth.signUpWithEmailPassword(
+           emailController.text,
+           passwordController.text,
+          nameController.text,
         );
       } else {
         Navigator.pop(context);
@@ -57,6 +60,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
+      AlertDialog(
+        title: Text(e.toString()),
+
+      );
       Navigator.pop(context);
       //ErrorShowMessage(context, e.code);
     }
@@ -71,21 +78,22 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(220, 255, 204, 0),
+     // backgroundColor: Theme.of(context).colorScheme.background,
       appBar: PreferredSize(
 
 
           preferredSize: const Size.fromHeight(110.0), // here the desired height
           child: AppBar(
-            actions: [
-              IconButton(
-                  onPressed: (){
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginOrRegistered(),
-                        ));
-                  }, icon: Icon(Icons.arrow_back),color: Colors.white,)],
+            leading: BackButton(
+              color: Colors.white,
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginOrRegistered(),
+                    ));
+              },
+            ),
 
             toolbarHeight: 220,
             title: const Text(
@@ -371,7 +379,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                   MyButton(
                     text: 'Sign Up',
-                    onTap: signUserUp,
+                    onTap:()=> signUserUp(context),
 
                   ),
 

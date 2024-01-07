@@ -1,3 +1,4 @@
+import 'package:coincare/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'forgot_password.dart';
@@ -15,28 +16,36 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
+
   bool crossVisible1 = false;
   bool crossVisible2 = false;
 
 
-  void signUserIn() async {
-
+  void signUserIn(BuildContext context) async {
+    final authservice=AuthService();
     showDialog(
       context: context,
       builder: (context) {
         return const Center(
           child: CircularProgressIndicator(),
+
         );
+
       },
     );
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailcontroller.text,
-        password: passwordcontroller.text,
+      await authservice.signInWithEmailPassword(
+        emailcontroller.text,
+        passwordcontroller.text,
+
       );
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
+      AlertDialog(
+        title: Text(e.toString()),
+
+      );
       Navigator.pop(context);
 
     }
@@ -234,7 +243,7 @@ class _LoginPageState extends State<LoginPage> {
 
                      MyButton(
                       text: 'Sign in',
-                      onTap: signUserIn,
+                      onTap: ()=>signUserIn(context),
                     ),
 
                   const SizedBox(height: 25,),

@@ -1,5 +1,4 @@
 import 'package:coincare/auth_page.dart';
-import 'package:coincare/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 class ForgotPasswordPage extends StatefulWidget {

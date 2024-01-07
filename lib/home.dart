@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Statistics page/statistics.dart';
 import 'Statistics page/bottomnavigationbar.dart';
+import 'chat/welcome_page.dart';
 
 class HomePage extends StatelessWidget {
   var height, width;
@@ -127,6 +128,14 @@ class HomePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => Bottom(),
+                          ),
+                        );
+                      }
+                      if(index==0){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => chatWelcomePage(),
                           ),
                         );
                       }
