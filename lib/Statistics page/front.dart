@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:coincare/Firestore/firestore_data.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -64,7 +64,6 @@ class _HomeState extends State<Home> {
 
 }
 
-
 Widget _head() {
   return Stack(
     children: [
@@ -112,14 +111,27 @@ Widget _head() {
                           color: Colors.white,
                         ),
                       ),
-                      Text(
-                        'Asif Avaas',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
-                      ),
+
+                      FutureBuilder<String>(
+                        future: FirestoreService.getUsername(),
+                        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          } else {
+                            if (snapshot.hasError)
+                              return Text('Error: ${snapshot.error}');
+                            else
+                              return Text(
+                                snapshot.data as String,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 36,
+                                  color: Colors.white,
+                                ),
+                              );
+                          }
+                        },
+                      )
                     ],
                   ),
                 )
@@ -170,21 +182,7 @@ Widget _head() {
                 ),
               ),
               SizedBox(height: 7),
-              /*Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Row(
-                    children: [
-                      Text(
-                        '\$ ${total()}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),*/
+
               SizedBox(height: 25),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -239,30 +237,7 @@ Widget _head() {
                 ),
               ),
               SizedBox(height: 6),
-              /*Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '\$ ${income()}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 17,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        '\$ ${expenses()}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 17,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                )*/
+
             ],
           ),
         ),

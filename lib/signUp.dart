@@ -28,11 +28,13 @@ class _RegisterPageState extends State<RegisterPage> {
   bool crossVisible3 = false;
   bool crossVisible4 = false;
 
-  final userRepo= Get.put(UserRepository());
+  /*final userRepo= Get.put(UserRepository());
 
   Future<void> creatUser(UserModel user) async {
      await userRepo.creatUser(user);
   }
+
+   */
 
   void signUserUp(BuildContext context) async {
     final auth=AuthService();
@@ -50,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
         await auth.signUpWithEmailPassword(
            emailController.text,
            passwordController.text,
-          nameController.text,
+           nameController.text,
         );
       } else {
         Navigator.pop(context);
@@ -67,11 +69,13 @@ class _RegisterPageState extends State<RegisterPage> {
       Navigator.pop(context);
       //ErrorShowMessage(context, e.code);
     }
-    final user=UserModel(
+    /*final user=UserModel(
       Username: nameController.text.trim(),
       email: emailController.text.trim(),
     );
     creatUser(user);
+
+     */
 
   }
 
