@@ -1,7 +1,10 @@
+
 import 'package:coincare/splash_screen.dart';
+import 'package:coincare/theme/light_mode.dart';
+import 'package:coincare/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'loginPage.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 
@@ -10,7 +13,9 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp( MyApp());
+  runApp( ChangeNotifierProvider(create: (context)=>ThemeProvider(),
+  child:  MyApp(),
+  ),);
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SplashScreen(),
+      theme: Provider.of<ThemeProvider>(context).themeData,
       debugShowCheckedModeBanner: false,
     );
   }
