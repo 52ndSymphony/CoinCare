@@ -5,6 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 class AuthService{
   final FirebaseAuth auth=FirebaseAuth.instance;
   final FirebaseFirestore firestore=FirebaseFirestore.instance;
+  User? getCurrentUser(){
+    return auth.currentUser;
+  }
   Future<UserCredential> signInWithEmailPassword(String email, password)async {
     try {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
