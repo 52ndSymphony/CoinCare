@@ -1,5 +1,9 @@
+import 'package:coincare/settings.dart';
+import 'package:coincare/theme/theme_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'Statistics page/statistics.dart';
 import 'Statistics page/bottomnavigationbar.dart';
 import 'chat/welcome_page.dart';
@@ -65,14 +69,8 @@ class HomePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.sort,
-                            color: Colors.white,
-                            size: 40,
-                          ),
-                        ),
+
+
 
                       ],
                     ),
@@ -136,6 +134,14 @@ class HomePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => chatWelcomePage(),
+                          ),
+                        );
+                      }
+                      if(index==3){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Settings(),
                           ),
                         );
                       }

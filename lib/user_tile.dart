@@ -13,12 +13,12 @@ class UserTile extends StatelessWidget{
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 20, 8, 0),
+        padding: const EdgeInsets.fromLTRB(30, 25, 18, 5),
         child: SingleChildScrollView(
           child: Container(
             height: 100,
             decoration: BoxDecoration(
-              color: Colors.orange,
+              color: Colors.orangeAccent,
               borderRadius: BorderRadius.circular(5),
           
             ),
