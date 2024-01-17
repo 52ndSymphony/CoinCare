@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'Statistics page/statistics.dart';
-import 'Statistics page/bottomnavigationbar.dart';
+import 'Statistics page/screens/statistics.dart';
+import 'Statistics page/widgets/bottomnavigationbar.dart';
 import 'chat/welcome_page.dart';
 
 class HomePage extends StatelessWidget {

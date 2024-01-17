@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'bottomnavigationbar.dart';
+import '../model/addDAta.dart';
+import '../widgets/bottomnavigationbar.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ ValueNotifier kj = ValueNotifier(0);
 class _StatisticsState extends State<Statistics> {
   List day = ['Day', 'Week', 'Month', 'Year'];
   List f = [];
-  ///List<Add_data> a = [];
+  List<Add_data> a = [];
   int index_color = 0;
   @override
   Widget build(BuildContext context) {

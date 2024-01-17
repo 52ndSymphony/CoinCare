@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coincare/Statistics%20page/model/addDAta.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
@@ -9,6 +12,8 @@ class Add_Screen extends StatefulWidget {
 }
 
 class _Add_ScreenState extends State<Add_Screen> {
+
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   DateTime date = new DateTime.now();
   String? selctedItem;
@@ -25,7 +30,7 @@ class _Add_ScreenState extends State<Add_Screen> {
   ];
   final List<String> _itemei = [
     'Income',
-    "Expand",
+    "Expend",
   ];
   @override
   void initState() {
@@ -87,8 +92,31 @@ class _Add_ScreenState extends State<Add_Screen> {
 
   GestureDetector save() {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        var add = Add_data(
+            selctedItemi!, amount_c.text, date, expalin_C.text, selctedItem!);
 
+        try {
+          // Get the current user's UID from Firebase Authentication
+          String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+          if (uid != null) {
+            // Use the UID in the Firestore collection path
+            await FirebaseFirestore.instance
+                .collection('Users')
+                .doc(uid)
+                .collection('data')
+                .add(add.toMap());
+
+            print('Data saved');
+            Navigator.of(context).pop();
+          } else {
+            // Handle the case where the user is not logged in
+            print('User is not logged in');
+          }
+        } catch (e) {
+          print('Error saving data: $e');
+        }
       },
       child: Container(
         alignment: Alignment.center,
@@ -357,3 +385,4 @@ class _Add_ScreenState extends State<Add_Screen> {
     );
   }
 }
+
