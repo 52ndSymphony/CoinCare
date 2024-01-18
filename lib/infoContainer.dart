@@ -115,13 +115,13 @@ class InfoContainer extends StatelessWidget{
                 padding: const EdgeInsets.symmetric(
                     vertical: 16),
                 decoration: BoxDecoration(
-                    color:  Colors.deepOrange,
+                    color:  Colors.white,
                     borderRadius: BorderRadius.circular(25)),
 
                 child: const Text(
                   'request',
                   style: TextStyle(
-                      fontSize: 12, color: Colors.white),
+                      fontSize: 12, color: Colors.amber),
                 ),
 
               ),
@@ -135,13 +135,13 @@ class InfoContainer extends StatelessWidget{
                     padding: const EdgeInsets.symmetric(
                         vertical: 16),
                     decoration: BoxDecoration(
-                        color:  Colors.deepOrange,
+                        color:  Colors.black,
                         borderRadius: BorderRadius.circular(25)),
                     //color: Colors.deepOrange,
                     child: const Text(
                       'send',
                       style: TextStyle(
-                          fontSize: 12, color: Colors.white
+                          fontSize: 12, color: Colors.amber
                       ),
                     ),
                   )
