@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                         const Icon(
                           Icons.menu,
                           color: Colors.white,
-                          size: 26,
+                          size: 25,
                         ),
                       ],
                     ),
