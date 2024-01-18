@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'front.dart';
-import 'statistics.dart';
-import 'add.dart';
+import '../screens/front.dart';
+import '../screens/statistics.dart';
+import '../screens/add.dart';
 
 
 class Bottom extends StatefulWidget {
