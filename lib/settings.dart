@@ -10,7 +10,7 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
+      backgroundColor: Theme.of(context).colorScheme.tertiary,
       appBar: PreferredSize(
 
 
@@ -33,20 +33,33 @@ class Settings extends StatelessWidget {
                 style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500,color: Colors.white,fontFamily: 'signika')
             ),
             centerTitle: true,
-            backgroundColor: Colors.orange,
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           )
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Container(
+          height: 60,
+          //width: 70,
+
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
 
 
 
-      Text("Dark Mode",style: TextStyle(color: Colors.white,fontFamily: 'signika',fontSize: 26,fontWeight: FontWeight.bold),),
-      CupertinoSwitch(value: Provider.of<ThemeProvider>(context,listen: false).isDarkMode, onChanged: (value)=>Provider.of<ThemeProvider>(context,listen: false).toggleTheme()),
-      ],
+          Text("Dark Mode",style: TextStyle(color: Colors.white,fontFamily: 'signika',fontSize: 26,fontWeight: FontWeight.bold),),
+          CupertinoSwitch(value: Provider.of<ThemeProvider>(context,listen: false).isDarkMode, onChanged: (value)=>Provider.of<ThemeProvider>(context,listen: false).toggleTheme()),
+          ],
 
-    ),
+              ),
+        ),
+      ),
     );
   }
 }

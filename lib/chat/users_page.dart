@@ -13,8 +13,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange,
-
+      backgroundColor: Theme.of(context).colorScheme.tertiary,
 
       appBar: PreferredSize(
 
@@ -30,16 +29,15 @@ class Home extends StatelessWidget {
             toolbarHeight: 220,
             title: const Text(
                 'USERS',
-                style: TextStyle(fontSize: 30,
-                    fontWeight: FontWeight.w500,
+                style: TextStyle(fontSize: 32,
+                    fontWeight: FontWeight.bold,
                     color: Colors.white,
                     fontFamily: 'signika')
             ),
 
             centerTitle: true,
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.amber,
-            elevation: 12,
+
+            backgroundColor:  Theme.of(context).colorScheme.primary,
           )
       ),
 

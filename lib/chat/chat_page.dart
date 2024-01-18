@@ -4,6 +4,7 @@ import 'package:coincare/chat/chat_bubble.dart';
 import 'package:coincare/chat/start_chatting.dart';
 import 'package:coincare/my_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ChatPage extends StatelessWidget {
 
   final String username;
@@ -27,16 +28,38 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.amberAccent,
-      appBar: AppBar(
-        title: Text(username),
-      ),
-      body: Column(
-        children: [
-          Expanded(child: buildMessageList()),
-          buildUserInput(),
-        ],
+    return GestureDetector(
+      onTap: (){
+        FocusScopeNode currentFocus=FocusScope.of(context);
+        if(!currentFocus.hasPrimaryFocus){
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+          appBar: AppBar(
+
+            leading: BackButton(
+              color: Colors.white,
+            ),
+            toolbarHeight: 120,
+            title: Text(
+                username,
+                style: TextStyle(fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontFamily: 'signika')
+            ),
+
+            backgroundColor:  Theme.of(context).colorScheme.inversePrimary,
+          ),
+
+        body: Column(
+          children: [
+            Expanded(child: buildMessageList()),
+            buildUserInput(),
+          ],
+        ),
       ),
     );
   }
@@ -74,28 +97,28 @@ class ChatPage extends StatelessWidget {
   }
   Widget buildUserInput(){
     return Padding(
+
       padding: const EdgeInsets.all(20.0),
       child: Row(
         children: [
 
           Expanded(
             child: TextFormField(
-
             controller: messageController,
               decoration: InputDecoration(
                 enabledBorder:  OutlineInputBorder(
                   borderRadius:  BorderRadius.circular(15.0),
-                  borderSide:  BorderSide(color: Colors.white,width: 2
+                  borderSide:  BorderSide(color: Colors.orange,width: 3
                   ),
 
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white,width: 2),
+                  borderSide: BorderSide(color: Colors.orange,width: 3),
                 ),
                 errorStyle:TextStyle(color: Colors.white),
                 label: Text(
                   'Type your text',
-                  style: TextStyle(fontSize: 20,color: Colors.black),
+                  style: TextStyle(fontSize: 20,color: Colors.white),
                 ),
                 filled: true,
                 fillColor: Color.fromARGB(200, 255, 187, 119),
@@ -106,7 +129,7 @@ class ChatPage extends StatelessWidget {
           SizedBox(width: 12,),
           Container(
             decoration: const BoxDecoration(
-              color: Colors.blueAccent,
+              color: Colors.orange,
               shape: BoxShape.circle
             ),
               margin: const EdgeInsets.only(right: 10),

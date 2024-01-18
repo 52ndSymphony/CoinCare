@@ -13,9 +13,9 @@ class chatWelcomePage extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.message,size: 100,color: Theme.of(context).colorScheme.primary,),
+            Icon(Icons.message,size: 100,color: Theme.of(context).colorScheme.secondary,),
             SizedBox(height: 15),
-            Text('Welcome',style: TextStyle(fontFamily: 'signika',color: Theme.of(context).colorScheme.primary,fontSize: 25,fontWeight: FontWeight.bold),)
+            Text('Welcome',style: TextStyle(fontFamily: 'signika',color: Theme.of(context).colorScheme.secondary,fontSize: 25,fontWeight: FontWeight.bold),)
           ],
         ),
       ),
