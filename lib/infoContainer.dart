@@ -98,7 +98,7 @@ class InfoContainer extends StatelessWidget{
             height: 4,
           ),
           Text(
-            '\$ 12000',
+            '\৳ 12000',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 26,
@@ -133,7 +133,7 @@ class InfoContainer extends StatelessWidget{
                   child: Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(
-                        vertical: 20),
+                        vertical: 16),
                     decoration: BoxDecoration(
                         color:  Colors.black,
                         borderRadius: BorderRadius.circular(25)),
