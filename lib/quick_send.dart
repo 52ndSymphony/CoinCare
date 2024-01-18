@@ -23,7 +23,7 @@ class QuickSend extends StatelessWidget {
             children: [
               const Text(
                 'quick send',
-                style: TextStyle(fontSize: 22, color: Colors.black),
+                style: TextStyle(fontSize: 23, color: Colors.black),
               ),
 
             ],
