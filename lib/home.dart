@@ -70,9 +70,11 @@ class HomePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-
-
-
+                        const Icon(
+                          Icons.menu,
+                          color: Colors.white,
+                          size: 26,
+                        ),
                       ],
                     ),
                   ),
