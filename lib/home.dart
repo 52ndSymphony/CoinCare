@@ -1,3 +1,4 @@
+import 'package:coincare/Transaction.dart';
 import 'package:coincare/settings.dart';
 import 'package:coincare/theme/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -142,6 +143,14 @@ class HomePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => Settings(),
+                          ),
+                        );
+                      }
+                      if(index==2){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Transaction(),
                           ),
                         );
                       }
