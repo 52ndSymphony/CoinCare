@@ -50,7 +50,7 @@ class Transaction extends StatelessWidget {
                         const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                         itemBuilder: (ctx, index) {
                           return Container(
-                            padding: EdgeInsets.all(2),
+                            padding: EdgeInsets.all(6),
                             width: 100,
                             height: 100,
                             child: Container(
