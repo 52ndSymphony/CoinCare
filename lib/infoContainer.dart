@@ -133,7 +133,7 @@ class InfoContainer extends StatelessWidget{
                   child: Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(
-                        vertical: 16),
+                        vertical: 20),
                     decoration: BoxDecoration(
                         color:  Colors.black,
                         borderRadius: BorderRadius.circular(25)),
