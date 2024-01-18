@@ -1,7 +1,14 @@
+import 'package:coincare/Transaction.dart';
+import 'package:coincare/settings.dart';
+import 'package:coincare/theme/theme_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'Statistics page/screens/statistics.dart';
-import 'Statistics page/widgets/bottomnavigationbar.dart';
+
+import 'package:provider/provider.dart';
+import 'Statistics page/statistics.dart';
+import 'Statistics page/bottomnavigationbar.dart';
+
 import 'chat/welcome_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -65,15 +72,11 @@ class HomePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        InkWell(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.sort,
-                            color: Colors.white,
-                            size: 40,
-                          ),
+                        const Icon(
+                          Icons.menu,
+                          color: Colors.white,
+                          size: 25,
                         ),
-
                       ],
                     ),
                   ),
@@ -136,6 +139,22 @@ class HomePage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => chatWelcomePage(),
+                          ),
+                        );
+                      }
+                      if(index==3){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Settings(),
+                          ),
+                        );
+                      }
+                      if(index==2){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Transaction(),
                           ),
                         );
                       }
