@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coincare/Firestore/firestore_data.dart';
+
+import '../model/addDAta.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,6 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var history;
+  List<Add_data> dataList = [];
 
   final List<String> day = [
     'Monday',
@@ -20,6 +25,35 @@ class _HomeState extends State<Home> {
     'saturday',
     'sunday'
   ];
+  @override
+  void initState() {
+    super.initState();
+    fetchData(); // Fetch Firestore data when the widget initializes
+  }
+
+  Future<void> fetchData() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        String uid = user.uid;
+
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(uid)
+            .collection('data')
+            .get();
+
+        // Store Firestore data in dataList
+        dataList = querySnapshot.docs
+            .map((doc) => Add_data.fromMap(doc.data() as Map<String, dynamic>))
+            .toList();
+
+        setState(() {}); // Trigger a rebuild after fetching data
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,14 +89,64 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
+            /*SliverList(
+              delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                  // Access dataList instead of box
+                  history = dataList[index];
+                  return getList(history, index);
+                },
+                childCount: dataList.length, // Use dataList length
+              ),
+            ),
 
-          ],
-        ),
-      ),
+             */
+             ],
+            )
+      )
     );
+
+
+
   }
 
 }
+
+
+
+/*
+Widget getList(Add_data history, int index) {
+  return Dismissible(
+    key: UniqueKey(),
+    onDismissed: (direction) {
+      deleteFirestoreData(history); // Call method to delete Firestore data
+    },
+    child: get(index, history),
+  );
+}
+
+ */
+
+void deleteFirestoreData(Add_data history) async {
+  try {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String uid = user.uid;
+
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(uid)
+          .collection('data')
+          .doc(history.IN)
+          .delete();
+    }
+  } catch (e) {
+    print('Error deleting data: $e');
+  }
+}
+
+
+
 
 Widget _head() {
   return Stack(
@@ -237,7 +321,32 @@ Widget _head() {
                 ),
               ),
               SizedBox(height: 6),
+             /* Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '\$ ${income()}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 17,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      '\$ ${expenses()}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 17,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              )
 
+              */
             ],
           ),
         ),
