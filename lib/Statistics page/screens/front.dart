@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coincare/Firestore/firestore_data.dart';
 
+import '../data/Get Transaction Data.dart';
 import '../model/addDAta.dart';
 
 class Home extends StatefulWidget {
@@ -25,46 +26,29 @@ class _HomeState extends State<Home> {
     'saturday',
     'sunday'
   ];
-  @override
-  void initState() {
-    super.initState();
-    fetchData(); // Fetch Firestore data when the widget initializes
+  String? uid = FirebaseAuth.instance.currentUser?.uid;
+  List<String>DataIds= [];
+
+  Future getDataIds()  async {
+      await FirebaseFirestore.instance.collection('Users').doc(uid).collection('data').get().then(
+              (snapshot) =>snapshot.docs.forEach((document) {
+                print(document.reference);
+                DataIds.add(document.reference.id);
+              }));
+      
   }
 
-  Future<void> fetchData() async {
-    try {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        String uid = user.uid;
 
-        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-            .collection('Users')
-            .doc(uid)
-            .collection('data')
-            .get();
 
-        // Store Firestore data in dataList
-        dataList = querySnapshot.docs
-            .map((doc) => Add_data.fromMap(doc.data() as Map<String, dynamic>))
-            .toList();
-
-        setState(() {}); // Trigger a rebuild after fetching data
-      }
-    } catch (e) {
-      print('Error fetching data: $e');
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: SizedBox(height: 340, child: _head()),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 340, child: _head()),
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,33 +61,54 @@ class _HomeState extends State<Home> {
                         color: Colors.black,
                       ),
                     ),
-                    Text(
-                      'See all',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
-                        color: Colors.grey,
-                      ),
-                    ),
+                    // Uncomment this section if you want to add a "See all" option
+                    // Text(
+                    //   'See all',
+                    //   style: TextStyle(
+                    //     fontWeight: FontWeight.w600,
+                    //     fontSize: 15,
+                    //     color: Colors.grey,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-            ),
-            /*SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                  // Access dataList instead of box
-                  history = dataList[index];
-                  return getList(history, index);
-                },
-                childCount: dataList.length, // Use dataList length
-              ),
-            ),
 
-             */
-             ],
-            )
-      )
+              Expanded(
+                child: FutureBuilder(
+                  future: getDataIds(),
+                  builder: (context,snapshot){
+                    return ListView.builder(
+                      itemCount: DataIds.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                          child: Card(
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: ListTile(
+                              title: GetTransactionData(DocumentId: DataIds[index]), // Assuming GetTransactionData returns a widget
+                              tileColor: Colors.amberAccent,
+                              contentPadding: EdgeInsets.all(16.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                            ),
+                          ),
+                        );
+
+                      },
+                    );
+                  },
+                )
+              ),
+
+            ],
+          ),
+        )
+
     );
 
 
