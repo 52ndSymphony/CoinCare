@@ -62,7 +62,7 @@ class _StatisticsState extends State<Statistics> {
 
     if (snapshot.docs.isNotEmpty) {
       DocumentSnapshot? lowestDocument;
-      int lowestAmount = 100000000;
+      int lowestAmount = 10000000;
       for (var doc in snapshot.docs) {
         Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?; // Cast to Map<String, dynamic>
         if (data != null && data.containsKey('amount')) {
