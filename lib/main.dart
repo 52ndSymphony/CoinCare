@@ -1,48 +1,38 @@
+
+
+import 'package:coincare/splash_screen.dart';
+import 'package:coincare/theme/light_mode.dart';
+import 'package:coincare/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'loginPage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
-void main(){
+final navigatorKey = GlobalKey<NavigatorState>();
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-  runApp(MyApp());
+  runApp( ChangeNotifierProvider(create: (context)=>ThemeProvider(),
+  child:  MyApp(),
+  ),);
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FirstPage(),
+      navigatorKey: navigatorKey,
+      home: SplashScreen(),
+      routes: {
+
+      },
+      theme: Provider.of<ThemeProvider>(context).themeData,
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class FirstPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      /*appBar: AppBar(
-        title: Text('Logo Page'),
-        backgroundColor: Color.fromARGB(235, 0, 255, 42),
-      ),*/
-      body: Center(
 
-          child: Image.asset(
-              'assets/firstpage.jpg',
-            width: 500.0,
-              height: 500.0,
-
-          ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SecondPage()),
-          );
-        },
-        child: Icon(Icons.arrow_forward),
-      ),
-    );
-  }
-}
