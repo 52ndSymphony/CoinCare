@@ -11,6 +11,12 @@ class FirestoreService {
     String username = snapshot.get('username');
     return username;
   }
+  static Future<String> getbalance() async {
+    String uid = _auth.currentUser!.uid;
+    DocumentSnapshot snapshot = await _db.collection('Users').doc(uid).get();
+    String balance = snapshot.get('balance');
+    return balance;
+  }
   static Future<String> getUid() async {
     String uid = _auth.currentUser!.uid;
 

@@ -1,21 +1,73 @@
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:coincare/infoContainer.dart';
-import 'package:coincare/quick_send.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'Statistics page/statistics.dart';
-//import 'Statistics page/bottomnavigationbar.dart';
-import 'chat/welcome_page.dart';
 
-class Transaction extends StatelessWidget {
-  Transaction({super.key});
+class Transaction extends StatefulWidget {
+  Transaction({Key? key}) : super(key: key);
+
+  @override
+  _TransactionState createState() => _TransactionState();
+}
+
+class _TransactionState extends State<Transaction> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+
+  String usernameError = '';
+  String amountError = '';
+
+  void _sendMoney() {
+    setState(() {
+      usernameError = usernameController.text.trim().isEmpty
+          ? 'Please enter your username'
+          : '';
+      amountError = amountController.text.trim().isEmpty
+          ? 'Please enter the amount'
+          : '';
+
+      if (usernameError.isEmpty && amountError.isEmpty) {
+        // Process sending money here
+        String enteredUsername = usernameController.text.trim();
+        double amount = double.parse(amountController.text.trim());
+        _uploadToFirebase(enteredUsername, amount);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Money sent successfully'),
+            duration: Duration(seconds: 2),
+            backgroundColor: Colors.amberAccent,
+          ),
+        );
+      }
+    });
+  }
+
+  Future<void> _uploadToFirebase(String username, double amount) async {
+    try {
+      String? uid = FirebaseAuth.instance.currentUser?.uid;
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(uid)
+          .collection('transactions')
+          .add({
+        'username': username,
+        'amount': amount,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      print('Data uploaded to Firebase successfully');
+    } catch (e) {
+      print('Error uploading data to Firebase: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
-        child: SingleChildScrollView( // Wrap the Column with SingleChildScrollView
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -24,88 +76,35 @@ class Transaction extends StatelessWidget {
                 const SizedBox(
                   height: 32,
                 ),
-                QuickSend(),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'History',
-                            style: TextStyle(fontSize: 18, color: Colors.black),
-                          ),
-                        ],
+                      TextField(
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          labelText: 'Username',
+                          errorText: usernameError,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 16,
+                      SizedBox(height: 16),
+                      TextField(
+                        controller: amountController,
+                        decoration: InputDecoration(
+                          labelText: 'Amount',
+                          errorText: amountError,
+                        ),
+                        keyboardType: TextInputType.number,
                       ),
-                      GridView.builder(
-                        itemCount: 10,
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                        itemBuilder: (ctx, index) {
-                          return Container(
-                            padding: EdgeInsets.all(6),
-                            width: 100,
-                            height: 100,
-                            child: Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                  color: Colors.amberAccent,
-                                  borderRadius: BorderRadius.circular(25)),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width : 30,
-                                        height: 30,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Image.network(
-                                            'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?cs=srgb&dl=pexels-italo-melo-2379004.jpg&fm=jpg',
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Column(
-                                        children: const [
-                                          Text(
-                                              'Ahnaf',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.white,
-                                              )
-                                          ),
-                                          const SizedBox(
-                                            height: 8,
-                                          ),
-                                          Text('14/01/2024',
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                color: Colors.white),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      )
+                      SizedBox(height: 32),
+                      ElevatedButton(
+                        onPressed: _sendMoney,
+                        child: Text('Send Money'),
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

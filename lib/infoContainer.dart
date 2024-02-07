@@ -1,8 +1,13 @@
 import 'package:coincare/money_send.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'Firestore/firestore_data.dart';
+
 class InfoContainer extends StatelessWidget {
-  const InfoContainer({Key? key}) : super(key: key);
+  InfoContainer({Key? key}) : super(key: key);
+  String? uid = FirebaseAuth.instance.currentUser?.uid;
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,23 +45,27 @@ class InfoContainer extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Hello',
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white.withOpacity(1.0),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        'Ahnaf',
-                        style: TextStyle(
-                          fontSize: 19,
-                          color: Colors.white.withOpacity(1.0),
-                        ),
-                      ),
+
+                      FutureBuilder<String>(
+                        future: FirestoreService.getUsername(),
+                        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          } else {
+                            if (snapshot.hasError)
+                              return Text('Error: ${snapshot.error}');
+                            else
+                              return Text(
+                                snapshot.data as String,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 35.0,
+                                  color: Colors.white,
+                                ),
+                              );
+                          }
+                        },
+                      )
                     ],
                   ),
                   SizedBox(
@@ -85,25 +94,38 @@ class InfoContainer extends StatelessWidget {
           const SizedBox(
             height: 4,
           ),
-          Text(
-            '\৳ 12000',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 26,
-                color: Colors.white),
+          FutureBuilder<String>(
+            future: FirestoreService.getbalance(),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else {
+                if (snapshot.hasError)
+                  return Text('Error: ${snapshot.error}');
+                else
+                  return Text(
+                    snapshot.data as String,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 26.0,
+                      color: Colors.white,
+                    ),
+                  );
+              }
+            },
           ),
           const SizedBox(
             height: 6,
           ),
           Row(
             children: [
-              Expanded(
+              /*Expanded(
                 child: GestureDetector(
                   onTap: () {
                     // Navigate to a new page when "send" button is pressed
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MoneySend()),
+                      //MaterialPageRoute(builder: (context) => MoneySend()),
                     );
                   },
                   child: Container(
@@ -120,25 +142,11 @@ class InfoContainer extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ),*/
               const SizedBox(
                 width: 8,
               ),
-              Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  padding:
-                  const EdgeInsets.symmetric(vertical: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: const Text(
-                    'request',
-                    style: TextStyle(fontSize: 12, color: Colors.amber),
-                  ),
-                ),
-              )
+
             ],
           )
         ],

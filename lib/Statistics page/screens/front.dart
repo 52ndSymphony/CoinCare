@@ -214,7 +214,7 @@ Widget _head() {
                                 snapshot.data as String,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 36,
+                                  fontSize: 36.0,
                                   color: Colors.white,
                                 ),
                               );

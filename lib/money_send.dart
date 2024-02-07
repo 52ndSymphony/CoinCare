@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MoneySend extends StatelessWidget {
   @override
@@ -15,11 +17,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController amountController = TextEditingController();
 
   String usernameError = '';
   String amountError = '';
+
+  // Variables to store entered username and amount
+  String enteredUsername = '';
+  double amount = 0.0;
 
   void _sendMoney() {
     setState(() {
@@ -32,6 +39,13 @@ class _MyHomePageState extends State<MyHomePage> {
           : '';
 
       if (usernameError.isEmpty && amountError.isEmpty) {
+        // Store entered values in variables
+        enteredUsername = usernameController.text.trim();
+        amount = double.parse(amountController.text.trim());
+
+        // Upload data to Firebase
+        _uploadToFirebase(enteredUsername, amount);
+
         // Perform actions when the username and amount are not empty
         // For simplicity, let's just show a success snackbar.
         ScaffoldMessenger.of(context).showSnackBar(
@@ -43,6 +57,25 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }
     });
+  }
+
+  Future<void> _uploadToFirebase(String username, double amount) async {
+    try {
+      // Get a reference to the Firestore instance
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Add a new document with a generated ID
+      String? uid = FirebaseAuth.instance.currentUser?.uid;
+      await FirebaseFirestore.instance.collection('Users').doc(uid).collection('transactions').add({
+        'username': username,
+        'amount': amount,
+        'timestamp': FieldValue.serverTimestamp(), // Optional: Include a timestamp
+      });
+
+      print('Data uploaded to Firebase successfully');
+    } catch (e) {
+      print('Error uploading data to Firebase: $e');
+    }
   }
 
   @override
@@ -85,4 +118,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-

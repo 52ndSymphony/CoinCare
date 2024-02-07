@@ -27,11 +27,13 @@ class _RegisterPageState extends State<RegisterPage> {
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
   var confirmPassController = TextEditingController();
+  var balanceController=  TextEditingController();
   static final notification=Chat_Notification_Services();
   bool crossVisible1 = false;
   bool crossVisible2 = false;
   bool crossVisible3 = false;
   bool crossVisible4 = false;
+  bool crossVisible5 = false;
 
 
 
@@ -52,6 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
            emailController.text,
            passwordController.text,
            nameController.text,
+          balanceController.text,
         );
 
       } else {
@@ -134,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         crossVisible2 = false;
                         crossVisible3 = false;
                         crossVisible4 = false;
+                        crossVisible5 = false;
                       });
                     },
                     onTapOutside: (PointerDownEvent event) {
@@ -197,6 +201,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         crossVisible1 = false;
                         crossVisible3 = false;
                         crossVisible4 = false;
+                        crossVisible5 = false;
                       });
                     },
                     onTapOutside: (PointerDownEvent event) {
@@ -253,14 +258,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(height: 15,),
 
                   TextFormField(
-                    obscureText: true,
-                    controller: passwordController,
+
+                    controller: balanceController,
                     onTap: () {
                       setState(() {
                         crossVisible3 = true;
                         crossVisible2 = false;
-                        crossVisible1 = false;
+                        crossVisible1= false;
                         crossVisible4 = false;
+                        crossVisible5 = false;
                       });
                     },
                     onTapOutside: (PointerDownEvent event) {
@@ -272,6 +278,70 @@ class _RegisterPageState extends State<RegisterPage> {
                     onFieldSubmitted: (text) {
                       setState(() {
                         crossVisible3 = false;
+                      });
+                    },
+
+                    validator: (value) {
+                      if (value!.trim().isEmpty) {
+                        return 'Please enter your balance !';
+                      } else
+                        return null;
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.person_2_outlined,color: Colors.white),
+                      // hintText: "Enter Email",
+                      enabledBorder:  OutlineInputBorder(
+                        borderRadius:  BorderRadius.circular(15.0),
+                        borderSide:  BorderSide(color: Colors.white,width: 2
+                        ),
+
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white,width: 2),
+                      ),
+                      errorStyle:TextStyle(color: Colors.white),
+                      label: Text(
+                        'Enter Your Bank Balance',
+                        style: TextStyle(fontSize: 20,color: Colors.white),
+                      ),
+                      filled: true,
+                      fillColor: Color.fromARGB(200, 255, 187, 119),
+                      suffixIcon: Visibility(
+                        visible: crossVisible1,
+                        child: IconButton(
+                          icon: Icon(Icons.clear,color: Colors.white),
+                          onPressed: () {
+                            balanceController.clear();
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 15,),
+
+                  TextFormField(
+                    obscureText: true,
+                    controller: passwordController,
+                    onTap: () {
+                      setState(() {
+                        crossVisible4 = true;
+                        crossVisible2 = false;
+                        crossVisible1 = false;
+                        crossVisible3= false;
+                        crossVisible5 = false;
+                      });
+                    },
+                    onTapOutside: (PointerDownEvent event) {
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      setState(() {
+                        crossVisible4 = false;
+                      });
+                    },
+                    onFieldSubmitted: (text) {
+                      setState(() {
+                        crossVisible4= false;
                       });
                     },
                     validator: (value) {
@@ -319,21 +389,22 @@ class _RegisterPageState extends State<RegisterPage> {
                     controller: confirmPassController,
                     onTap: () {
                       setState(() {
-                        crossVisible4 = true;
+                        crossVisible5 = true;
                         crossVisible2 = false;
                         crossVisible3 = false;
                         crossVisible1 = false;
+                        crossVisible4= false;
                       });
                     },
                     onTapOutside: (PointerDownEvent event) {
                       FocusScope.of(context).requestFocus(FocusNode());
                       setState(() {
-                        crossVisible4 = false;
+                        crossVisible5 = false;
                       });
                     },
                     onFieldSubmitted: (text) {
                       setState(() {
-                        crossVisible4 = false;
+                        crossVisible5 = false;
                       });
                     },
 
