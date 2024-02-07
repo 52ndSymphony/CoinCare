@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../data/Get Transaction Data.dart';
 import '../model/addDAta.dart';
 import '../widgets/bottomnavigationbar.dart';
 
@@ -16,19 +19,190 @@ class _StatisticsState extends State<Statistics> {
   List f = [];
   List<Add_data> a = [];
   int index_color = 0;
+  String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+  Future<DocumentSnapshot?> findDocumentWithHighestAmount() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('Users').doc(uid).collection('data').get();
+
+    if (snapshot.docs.isNotEmpty) {
+      DocumentSnapshot? highestDocument;
+      int highestAmount = 0;
+
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?; // Cast to Map<String, dynamic>
+        if (data != null && data.containsKey('amount')) {
+          var amount = data['amount'];
+          if (amount is int) {
+            if (amount > highestAmount) {
+              highestAmount = amount;
+              highestDocument = doc;
+            }
+          } else if (amount is String) {
+            var parsedAmount = int.tryParse(amount);
+            if (parsedAmount != null && parsedAmount > highestAmount) {
+              highestAmount = parsedAmount;
+              highestDocument = doc;
+            }
+          }
+        }
+      }
+
+      return highestDocument;
+    } else {
+      // Handle the case where no documents are found
+      return null;
+    }
+  }
+  Future<DocumentSnapshot?> findDocumentWithLowestAmount() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uid)
+        .collection('data')
+        .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      DocumentSnapshot? lowestDocument;
+      int lowestAmount = 100000000;
+      for (var doc in snapshot.docs) {
+        Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?; // Cast to Map<String, dynamic>
+        if (data != null && data.containsKey('amount')) {
+          var amount = data['amount'];
+          if (amount is int) {
+            if (amount < lowestAmount) {
+              lowestAmount = amount;
+              lowestDocument = doc;
+            }
+          } else if (amount is String) {
+            var parsedAmount = int.tryParse(amount);
+            if (parsedAmount != null && parsedAmount < lowestAmount) {
+              lowestAmount = parsedAmount;
+              lowestDocument = doc;
+            }
+          }
+        }
+      }
+
+      return lowestDocument;
+    } else {
+      // Handle the case where no documents are found
+      return null;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ValueListenableBuilder(
-          valueListenable: kj,
-          builder: (BuildContext context, dynamic value, Widget? child) {
-            //a = f[value];
-            return custom();
-          },
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(110.0), // here the desired height
+        child: AppBar(
+          leading: BackButton(
+            color: Colors.white,
+            onPressed: () {
+              Navigator.pop(context); // Fix the navigation pop here
+            },
+          ),
+          toolbarHeight: 220,
+          title: const Text(
+            'Statistics',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500, color: Colors.white, fontFamily: 'signika'),
+          ),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
       ),
-    );
+      body: FutureBuilder<DocumentSnapshot?>(
+        future: findDocumentWithHighestAmount(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (snapshot.hasData && snapshot.data != null) {
+            String uidHighest = snapshot.data!.id; // Accessing the ID of the document with highest amount
+            return Column(
+              children: [
+                Text(
+                  'Your highest spending:',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    child: Card(
+                      elevation: 2.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: ListTile(
+                        title: GetTransactionData(DocumentId: uidHighest), // Pass the UID of the document with highest amount
+                        tileColor: Colors.amberAccent,
+                        contentPadding: EdgeInsets.all(16.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20), // Add spacing between highest and lowest spending cards
+                Text(
+                  'Your lowest spending:',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+                Expanded(
+                  child: FutureBuilder<DocumentSnapshot?>(
+                    future: findDocumentWithLowestAmount(), // Use findDocumentWithLowestAmount to fetch the document with the lowest amount
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text('Error: ${snapshot.error}'),
+                        );
+                      } else if (snapshot.hasData && snapshot.data != null) {
+                        String uidLowest = snapshot.data!.id; // Accessing the ID of the document with lowest amount
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                          child: Card(
+                            elevation: 2.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            child: ListTile(
+                              title: GetTransactionData(DocumentId: uidLowest), // Pass the UID of the document with lowest amount
+                              tileColor: Colors.amberAccent,
+                              contentPadding: EdgeInsets.all(16.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Center(
+                          child: Text('No data'),
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return Center(
+              child: Text('No data'),
+            );
+          }
+        },
+      ),
+
+      );
+
   }
 }
 
@@ -86,9 +260,9 @@ CustomScrollView custom() {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            //SizedBox(height: 20),
 
-            SizedBox(height: 20),
+            //SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(

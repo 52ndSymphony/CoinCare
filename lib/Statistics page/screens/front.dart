@@ -73,6 +73,7 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
+
               Expanded(
                 child: FutureBuilder(
                   future: getDataIds(),
@@ -103,6 +104,7 @@ class _HomeState extends State<Home> {
                   },
                 )
               ),
+
             ],
           ),
         )
