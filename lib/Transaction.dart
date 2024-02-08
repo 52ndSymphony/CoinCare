@@ -3,7 +3,8 @@ import 'package:coincare/infoContainer.dart';
 import 'package:coincare/quick_send.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+//import 'Statistics page/statistics.dart';
+//import 'Statistics page/bottomnavigationbar.dart';
 import 'chat/welcome_page.dart';
 
 class Transaction extends StatelessWidget {

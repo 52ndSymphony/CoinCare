@@ -1,27 +1,25 @@
+import 'package:coincare/money_send.dart';
 import 'package:flutter/material.dart';
 
-class InfoContainer extends StatelessWidget{
-  const InfoContainer({super.key});
+class InfoContainer extends StatelessWidget {
+  const InfoContainer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext){
+  Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(
-          left: 16, right: 16, bottom: 16, top: 15
-      ),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 15),
       height: 270,
-      decoration:  BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Color.fromARGB(211, 246, 178, 3),
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-              colors: [
-                const Color(0xFFE0AE0C),
-                const Color(0xFFE7A910).withOpacity(0.55),
-              ]
-          )
-
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: Color.fromARGB(211, 246, 178, 3),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.topRight,
+          colors: [
+            const Color(0xFFE0AE0C),
+            const Color(0xFFE7A910).withOpacity(0.55),
+          ],
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,23 +58,11 @@ class InfoContainer extends StatelessWidget{
                         ),
                       ),
                     ],
-
-
                   ),
                   SizedBox(
                     width: 250,
                   ),
-                  /*Column(
-                    children: [
-                      const Icon(
-                        Icons.notifications,
-                        color: Colors.white,
-                        size: 22,
-                      ),
-                    ],
-                  )*/
                 ],
-
               ),
             ],
           ),
@@ -85,13 +71,15 @@ class InfoContainer extends StatelessWidget{
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:  [
+            children: [
               Text(
                 'your total balance',
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
-              const Icon(Icons.remove_red_eye_rounded,
-                color: Colors.white,),
+              const Icon(
+                Icons.remove_red_eye_rounded,
+                color: Colors.white,
+              ),
             ],
           ),
           const SizedBox(
@@ -109,44 +97,48 @@ class InfoContainer extends StatelessWidget{
           ),
           Row(
             children: [
-              Expanded(child:
-              Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(
-                    vertical: 16),
-                decoration: BoxDecoration(
-                    color:  Colors.white,
-                    borderRadius: BorderRadius.circular(25)),
-
-                child: const Text(
-                  'request',
-                  style: TextStyle(
-                      fontSize: 12, color: Colors.amber),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    // Navigate to a new page when "send" button is pressed
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MoneySend()),
+                    );
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: const Text(
+                      'send',
+                      style: TextStyle(fontSize: 12, color: Colors.amber),
+                    ),
+                  ),
                 ),
-
-              ),
               ),
               const SizedBox(
                 width: 8,
               ),
               Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16),
-                    decoration: BoxDecoration(
-                        color:  Colors.black,
-                        borderRadius: BorderRadius.circular(25)),
-                    //color: Colors.deepOrange,
-                    child: const Text(
-                      'send',
-                      style: TextStyle(
-                          fontSize: 12, color: Colors.amber
-                      ),
-                    ),
-                  )
+                child: Container(
+                  alignment: Alignment.center,
+                  padding:
+                  const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: const Text(
+                    'request',
+                    style: TextStyle(fontSize: 12, color: Colors.amber),
+                  ),
+                ),
               )
-
             ],
           )
         ],
@@ -154,3 +146,4 @@ class InfoContainer extends StatelessWidget{
     );
   }
 }
+
