@@ -130,6 +130,7 @@ class _ChatPageState extends State<transferPage> {
           children: [
           //  ChatBubble(message: data["message"], isCurrentUser: isCurrentUser,timestamp: data["timestamp"],),
           ],
+
         ));
 
   }
