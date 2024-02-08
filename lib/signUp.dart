@@ -1,5 +1,3 @@
-
-
 import 'package:coincare/Firestore/user_model.dart';
 import 'package:coincare/Firestore/user_repository.dart';
 import 'package:coincare/auth_service.dart';

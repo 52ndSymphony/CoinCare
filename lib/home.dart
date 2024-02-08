@@ -1,5 +1,6 @@
 import 'package:coincare/Transaction.dart';
 import 'package:coincare/chat_notification_service.dart';
+import 'package:coincare/profile/profile_page.dart';
 import 'package:coincare/settings.dart';
 import 'package:coincare/theme/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -97,11 +98,7 @@ class _HomeScreenState extends State<HomePage>  {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(
-                          Icons.menu,
-                          color: Colors.white,
-                          size: 25,
-                        ),
+
                       ],
                     ),
                   ),
@@ -171,7 +168,7 @@ class _HomeScreenState extends State<HomePage>  {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Settings(),
+                            builder: (context) => ProfilePage(),
                           ),
                         );
                       }
