@@ -90,7 +90,7 @@ class Chat_Notification_Services{
         _initLocalNotification();
         FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async{
           await Navigator.of(context).push(
-            MaterialPageRoute(builder: (_)=>ChatPage(username: message.data['senderID'], receiverID: message.data['uid'])),
+            MaterialPageRoute(builder: (_)=>ChatPage(username: message.data['uid'], receiverID: message.data['senderID'])),
 
           );
         });
