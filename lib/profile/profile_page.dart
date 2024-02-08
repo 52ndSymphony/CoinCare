@@ -22,6 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
           if(snapshot.hasData){
     final userData=snapshot.data!.data() as Map<String,dynamic>;
     return ListView(
+
     children: [
     SizedBox(height: 100,),
     Icon(Icons.person,size: 70,),
