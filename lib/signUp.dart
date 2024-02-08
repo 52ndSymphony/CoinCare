@@ -33,13 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool crossVisible3 = false;
   bool crossVisible4 = false;
 
-  /*final userRepo= Get.put(UserRepository());
 
-  Future<void> creatUser(UserModel user) async {
-     await userRepo.creatUser(user);
-  }
-
-   */
 
   void signUserUp(BuildContext context) async {
     final auth=AuthService();
