@@ -18,11 +18,40 @@ class GetTransactionData extends StatelessWidget {
             if(snapshot.connectionState==ConnectionState.done){
               Map<String,dynamic>data=snapshot.data!.data() as Map<String,dynamic>;
               return Text('${data['explain']} \n${data['name']}\n'
-                  'Ammount: ${data['amount']} Taka'
+                  'Ammount: ${data['amount']} Taka',
+                style: TextStyle(color: Colors.white,fontSize: 18.0),
 
               );
             }
             return Text('Loading.....');
+        }
+
+        ));
+  }
+}
+class GetStatData extends StatelessWidget {
+
+
+  final String DocumentId;
+  String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+  GetStatData({required this.DocumentId});
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users=FirebaseFirestore.instance.collection('Users').doc(uid).collection('data');
+    return FutureBuilder<DocumentSnapshot>(
+        future: users.doc(DocumentId).get(),
+        builder: ((context,snapshot){
+          if(snapshot.connectionState==ConnectionState.done){
+            Map<String,dynamic>data=snapshot.data!.data() as Map<String,dynamic>;
+            return Text('${data['explain']} \n${data['name']}\n'
+                'Ammount: ${data['amount']} Taka',
+              style: TextStyle(color: Colors.black,fontSize: 26.0),
+
+            );
+          }
+          return Text('Loading.....');
         }
 
         ));

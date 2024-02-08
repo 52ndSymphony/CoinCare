@@ -106,102 +106,158 @@ class _StatisticsState extends State<Statistics> {
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500, color: Colors.white, fontFamily: 'signika'),
           ),
           centerTitle: true,
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor:  Color.fromARGB(200, 221, 201, 166),
         ),
       ),
-      body: FutureBuilder<DocumentSnapshot?>(
-        future: findDocumentWithHighestAmount(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else if (snapshot.hasData && snapshot.data != null) {
-            String uidHighest = snapshot.data!.id; // Accessing the ID of the document with highest amount
-            return Column(
-              children: [
-                Text(
-                  'Your highest spending:',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    child: Card(
-                      elevation: 2.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: ListTile(
-                        title: GetTransactionData(DocumentId: uidHighest), // Pass the UID of the document with highest amount
-                        tileColor: Colors.amberAccent,
-                        contentPadding: EdgeInsets.all(16.0),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/statpage2.jpg'), // Provide your image path here
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: FutureBuilder<DocumentSnapshot?>(
+          future: findDocumentWithHighestAmount(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else if (snapshot.hasData && snapshot.data != null) {
+              String uidHighest = snapshot.data!.id; // Accessing the ID of the document with highest amount
+              return Column(
+                children: [
+                  Text(
+                    'Your highest spending:',
+                    style: TextStyle(fontSize: 26.0),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      child: Card(
+                        elevation: 4.0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20), // Add spacing between highest and lowest spending cards
-                Text(
-                  'Your lowest spending:',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                Expanded(
-                  child: FutureBuilder<DocumentSnapshot?>(
-                    future: findDocumentWithLowestAmount(), // Use findDocumentWithLowestAmount to fetch the document with the lowest amount
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child: Text('Error: ${snapshot.error}'),
-                        );
-                      } else if (snapshot.hasData && snapshot.data != null) {
-                        String uidLowest = snapshot.data!.id; // Accessing the ID of the document with lowest amount
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                          child: Card(
-                            elevation: 2.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
+                        child: Container(
+                          height: 120,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
+                            image: DecorationImage(
+                              image: AssetImage('assets/card.jpg'),
+                              fit: BoxFit.cover,
                             ),
+                          ),
+                          child: Center(
                             child: ListTile(
-                              title: GetTransactionData(DocumentId: uidLowest), // Pass the UID of the document with lowest amount
-                              tileColor: Colors.amberAccent,
+                              title: GetStatData(DocumentId: uidHighest),
+                              tileColor: Colors.transparent,
                               contentPadding: EdgeInsets.all(16.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                             ),
                           ),
-                        );
-                      } else {
-                        return Center(
-                          child: Text('No data'),
-                        );
-                      }
-                    },
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            );
-          } else {
-            return Center(
-              child: Text('No data'),
-            );
-          }
-        },
+
+
+
+
+                  SizedBox(height: 20), // Add spacing between highest and lowest spending cards
+                  Text(
+                    'Your lowest spending:',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                  Expanded(
+                    child: FutureBuilder<DocumentSnapshot?>(
+                      future: findDocumentWithLowestAmount(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text('Error: ${snapshot.error}'),
+                          );
+                        } else if (snapshot.hasData && snapshot.data != null) {
+                          String uidLowest = snapshot.data!.id;
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                            child: Card(
+                              elevation: 4.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Container(
+                                height: 120,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/card.jpg'),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: ListTile(
+                                    title: GetStatData(DocumentId: uidLowest),
+                                    tileColor: Colors.transparent,
+                                    contentPadding: EdgeInsets.all(16.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Center(
+                            child: Text('No data'),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+
+
+
+                ],
+              );
+            } else {
+              return Center(
+                child: Text('No data'),
+              );
+            }
+          },
+        ),
       ),
 
-      );
+
+    );
 
   }
 }

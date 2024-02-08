@@ -90,15 +90,24 @@ class _ChatPageState extends State<ChatPage> {
                     fontFamily: 'signika')
             ),
 
-            backgroundColor:  Theme.of(context).colorScheme.inversePrimary,
+            backgroundColor:  Color.fromARGB(200, 221, 201, 166),
           ),
 
-        body: Column(
-          children: [
-            Expanded(child: buildMessageList()),
-            buildUserInput(),
-          ],
-        ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/chatting.jpg'), // Provide your image path here
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: [
+              Expanded(child: buildMessageList()),
+              buildUserInput(),
+            ],
+          ),
+        )
+
       ),
     );
   }
@@ -152,7 +161,7 @@ class _ChatPageState extends State<ChatPage> {
               decoration: InputDecoration(
                 enabledBorder:  OutlineInputBorder(
                   borderRadius:  BorderRadius.circular(15.0),
-                  borderSide:  BorderSide(color: Colors.orange,width: 3
+                  borderSide:  BorderSide(color: Colors.grey,width: 3
                   ),
 
                 ),
@@ -165,7 +174,7 @@ class _ChatPageState extends State<ChatPage> {
                   style: TextStyle(fontSize: 20,color: Colors.white),
                 ),
                 filled: true,
-                fillColor: Color.fromARGB(200, 255, 187, 119),
+                fillColor: Color.fromARGB(200, 186, 197, 192),
 
               ),
 
@@ -173,7 +182,7 @@ class _ChatPageState extends State<ChatPage> {
           SizedBox(width: 12,),
           Container(
             decoration: const BoxDecoration(
-              color: Colors.orange,
+              color: Colors.grey,
               shape: BoxShape.circle
             ),
               margin: const EdgeInsets.only(right: 10),

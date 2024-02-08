@@ -8,14 +8,14 @@ class chatWelcomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return AnimatedSplashScreen(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Color.fromARGB(200, 207, 177, 119),
       splash: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.message,size: 100,color: Theme.of(context).colorScheme.secondary,),
+            Icon(Icons.message,size: 100,color: Colors.white),
             SizedBox(height: 15),
-            Text('Welcome',style: TextStyle(fontFamily: 'signika',color: Theme.of(context).colorScheme.secondary,fontSize: 25,fontWeight: FontWeight.bold),)
+            Text('Welcome',style: TextStyle(fontFamily: 'signika',color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),)
           ],
         ),
       ),

@@ -37,12 +37,19 @@ class Home extends StatelessWidget {
 
             centerTitle: true,
 
-            backgroundColor:  Theme.of(context).colorScheme.primary,
+            backgroundColor:  Color.fromARGB(200, 221, 201, 166),
           )
       ),
 
-      body: buildUserList(),
-
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/chat.jpg'), // Provide your image path here
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: buildUserList(), // Assuming buildUserList() returns a widget for user list
+      ),
 
     );
   }

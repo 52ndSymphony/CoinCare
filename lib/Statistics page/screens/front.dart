@@ -1,10 +1,18 @@
+
+
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coincare/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:coincare/Firestore/firestore_data.dart';
+import 'package:get/get.dart';
 
+import '../../home.dart';
 import '../data/Get Transaction Data.dart';
 import '../model/addDAta.dart';
+import '../widgets/bottomnavigationbar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -42,8 +50,29 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    FloatingActionButton(
+
+      onPressed: () {
+        Navigator.push(
+          context ,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+
+        );
+      },
+      child: Icon(Icons.logout, color: Colors.white),
+      backgroundColor: Colors.white,
+    );
     return Scaffold(
-        body: SafeArea(
+      body: SafeArea(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/statpage.jpg'), // Provide your image path here
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -73,11 +102,10 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
-
               Expanded(
                 child: FutureBuilder(
                   future: getDataIds(),
-                  builder: (context,snapshot){
+                  builder: (context, snapshot) {
                     return ListView.builder(
                       itemCount: DataIds.length,
                       itemBuilder: (context, index) {
@@ -88,28 +116,46 @@ class _HomeState extends State<Home> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            child: ListTile(
-                              title: GetTransactionData(DocumentId: DataIds[index]), // Assuming GetTransactionData returns a widget
-                              tileColor: Colors.amberAccent,
-                              contentPadding: EdgeInsets.all(16.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
+
+                              //padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                              child: Card(
+                                elevation: 2.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage('assets/chathead.jpg'), // Provide your image path here
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  child: ListTile(
+                                    title: GetTransactionData(DocumentId: DataIds[index]), // Assuming GetTransactionData returns a widget
+                                    tileColor: Colors.transparent, // Set tileColor to transparent to let background image show
+                                    contentPadding: EdgeInsets.all(16.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
+
+
                           ),
                         );
-
                       },
                     );
                   },
-                )
+                ),
               ),
-
             ],
           ),
-        )
-
+        ),
+      ),
     );
+
 
 
 
@@ -162,7 +208,10 @@ Widget _head() {
             width: double.infinity,
             height: 240,
             decoration: BoxDecoration(
-              color: Colors.amber,
+              image: DecorationImage(
+                image: AssetImage('assets/stat_top.jpg'), // Provide your image path here
+                fit: BoxFit.cover,
+              ),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -179,11 +228,11 @@ Widget _head() {
                       height: 40,
                       width: 40,
                       color: Color.fromRGBO(250, 250, 250, 0.1),
-                      child: Icon(
-                        Icons.notification_add_outlined,
-                        size: 30,
-                        color: Colors.white,
-                      ),
+                      //child: Icon(
+                      //  Icons.notification_add_outlined,
+                      //  size: 30,
+                      //  color: Colors.white,
+                      //),
                     ),
                   ),
                 ),
@@ -200,7 +249,6 @@ Widget _head() {
                           color: Colors.white,
                         ),
                       ),
-
                       FutureBuilder<String>(
                         future: FirestoreService.getUsername(),
                         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -226,7 +274,8 @@ Widget _head() {
                 )
               ],
             ),
-          ),
+          )
+
         ],
       ),
       Positioned(
@@ -244,7 +293,7 @@ Widget _head() {
                 spreadRadius: 6,
               ),
             ],
-            color: Colors.amberAccent[700],
+            color: Colors.grey[400],
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
@@ -259,7 +308,7 @@ Widget _head() {
                       'Total Balance',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 16,
+                        fontSize: 26.0,
                         color: Colors.white,
                       ),
                     ),
