@@ -1,4 +1,5 @@
 import 'package:coincare/Transaction.dart';
+import 'package:coincare/chat_notification_service.dart';
 import 'package:coincare/settings.dart';
 import 'package:coincare/theme/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,12 +7,36 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:provider/provider.dart';
-import 'Statistics page/statistics.dart';
-import 'Statistics page/bottomnavigationbar.dart';
+//import 'Statistics page/statistics.dart';
+//import 'Statistics page/bottomnavigationbar.dart';
 
+import 'Statistics page/widgets/bottomnavigationbar.dart';
 import 'chat/welcome_page.dart';
+import 'notification_service.dart';
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-class HomePage extends StatelessWidget {
+  @override
+  State<HomePage> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomePage>  {
+  NotificationServices notificationServices=NotificationServices();
+  final notificationService=Chat_Notification_Services();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    notificationServices.requestNotificationPermission();
+    notificationServices.firebaseInit(context);
+    notificationServices.setupInteractMessage(context);
+    notificationServices.isTokenRefresh();
+    notificationServices.getDeviceToken().then((value){
+      print('device value');
+      print(value);
+
+    });
+  }
   var height, width;
 
   List imgData = [
@@ -28,7 +53,7 @@ class HomePage extends StatelessWidget {
     "Profile",
   ];
 
-  HomePage({super.key});
+
   final user = FirebaseAuth.instance.currentUser!;
 
   // sign user out

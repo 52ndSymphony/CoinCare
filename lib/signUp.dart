@@ -1,3 +1,5 @@
+
+
 import 'package:coincare/Firestore/user_model.dart';
 import 'package:coincare/Firestore/user_repository.dart';
 import 'package:coincare/auth_service.dart';
@@ -5,7 +7,9 @@ import 'package:coincare/button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'chat_notification_service.dart';
 import 'loginorregisterpage.dart';
+import 'chat_notification_service.dart';
 
 
 class RegisterPage extends StatefulWidget {
@@ -23,6 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
   var confirmPassController = TextEditingController();
+  static final notification=Chat_Notification_Services();
   bool crossVisible1 = false;
   bool crossVisible2 = false;
   bool crossVisible3 = false;
@@ -54,13 +59,17 @@ class _RegisterPageState extends State<RegisterPage> {
            passwordController.text,
            nameController.text,
         );
+
       } else {
         Navigator.pop(context);
         //ErrorShowMessage(context, 'Password Don\'t Match');
         return;
       }
-
+      await notification.requestNotiPermission();
+      await notification.getToken();
       Navigator.pop(context);
+
+
     } on FirebaseAuthException catch (e) {
       AlertDialog(
         title: Text(e.toString()),

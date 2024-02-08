@@ -1,4 +1,5 @@
 import 'package:coincare/auth_service.dart';
+import 'package:coincare/chat_notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'forgot_password.dart';
@@ -16,6 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
+  static final notifications=Chat_Notification_Services();
 
   bool crossVisible1 = false;
   bool crossVisible2 = false;
@@ -40,6 +42,8 @@ class _LoginPageState extends State<LoginPage> {
         passwordcontroller.text,
 
       );
+      await notifications.requestNotiPermission();
+      await notifications.getToken();
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       AlertDialog(
