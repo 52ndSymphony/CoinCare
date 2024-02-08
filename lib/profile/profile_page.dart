@@ -68,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 15,
                   ),
                   MylistTile(
-                    text: userData["balance"],
+                    text: userData["balance"]+ ' taka',
                     sectionName: 'Current Balance',
                   ),
                   const SizedBox(
