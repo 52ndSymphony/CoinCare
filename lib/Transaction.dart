@@ -22,9 +22,8 @@ class _TransactionState extends State<Transaction> {
       usernameError = usernameController.text.trim().isEmpty
           ? 'Please enter your username'
           : '';
-      amountError = amountController.text.trim().isEmpty
-          ? 'Please enter the amount'
-          : '';
+      amountError =
+          amountController.text.trim().isEmpty ? 'Please enter the amount' : '';
 
       if (usernameError.isEmpty && amountError.isEmpty) {
         // Process sending money here
@@ -100,8 +99,21 @@ class _TransactionState extends State<Transaction> {
                       SizedBox(height: 32),
                       ElevatedButton(
                         onPressed: _sendMoney,
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.amber[300], // Background color of the button
+                          onPrimary: Colors.white, // Text color of the button
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40), // Padding around the button's text
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10), // Rounded corners for the button
+                          ),
+                          textStyle: TextStyle(
+                            fontSize: 18, // Font size of the button's text
+                          ),
+                          elevation: 3, // Elevation of the button
+                        ),
                         child: Text('Send Money'),
                       ),
+
                     ],
                   ),
                 ),

@@ -63,10 +63,10 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/logi.jpg'),
-            fit: BoxFit.cover,
-          )
+            image: DecorationImage(
+              image: AssetImage('assets/login.jpg'),
+              fit: BoxFit.cover,
+            )
         ),
         child: SafeArea(
           child: Center(
@@ -78,21 +78,21 @@ class _LoginPageState extends State<LoginPage> {
 
 
 
-                     Text(
-                      'Welcome Back!',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 36,fontFamily: 'signika',
-                      ),
+                  Text(
+                    'Welcome Back!',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 36,fontFamily: 'signika',
                     ),
+                  ),
 
                   const SizedBox(height: 45,),
 
                   TextFormField(
 
                     controller: emailcontroller,
-                    cursorColor: Colors.white,
+                    cursorColor: Colors.black,
                     onTap: () {
                       setState(() {
                         crossVisible1 = true;
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
                     validator: (value) {
-                      TextStyle(color: Colors.white);
+                      TextStyle(color: Colors.black);
                       if (value!.trim().isEmpty) {
                         return 'Please enter your email !';
                       } else
@@ -121,29 +121,29 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.person_2_outlined,color: Colors.white),
+                      icon: Icon(Icons.person_2_outlined,color: Colors.black),
                       // hintText: "Enter Email",
 
                       enabledBorder:  OutlineInputBorder(
                         borderRadius:  BorderRadius.circular(15.0),
-                        borderSide:  BorderSide(color: Colors.white,width: 2
+                        borderSide:  BorderSide(color: Colors.black,width: 2
                         ),
 
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white,width: 2),
+                        borderSide: BorderSide(color: Colors.black,width: 2),
                       ),
-                      errorStyle:TextStyle(color: Colors.white),
+                      errorStyle:TextStyle(color: Colors.black),
                       label: Text(
                         'Enter Username/Email',
-                        style: TextStyle(fontSize: 20,color: Colors.white),
+                        style: TextStyle(fontSize: 20,color: Colors.black),
                       ),
                       filled: true,
-                      fillColor: Color.fromARGB(200, 255, 187, 119),
+                      fillColor: Color.fromARGB(200, 180, 180, 200),
                       suffixIcon: Visibility(
                         visible: crossVisible1,
                         child: IconButton(
-                          icon: Icon(Icons.clear,color: Colors.white),
+                          icon: Icon(Icons.clear,color: Colors.black),
                           onPressed: () {
                             emailcontroller.clear();
                           },
@@ -183,28 +183,28 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.key_outlined,color: Colors.white,),
+                      icon: Icon(Icons.key_outlined,color: Colors.black,),
                       // hintText: "Enter Email",
                       enabledBorder:  OutlineInputBorder(
                         borderRadius:  BorderRadius.circular(15.0),
-                        borderSide:  BorderSide(color: Colors.white,width: 2
+                        borderSide:  BorderSide(color: Colors.black,width: 2
                         ),
 
                       ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.orange,width: 2),
                       ),
-                      errorStyle:TextStyle(color: Colors.white),
+                      errorStyle:TextStyle(color: Colors.black),
                       label: Text(
                         'Password',
-                        style: TextStyle(fontSize: 20,color: Colors.white),
+                        style: TextStyle(fontSize: 20,color: Colors.black),
                       ),
                       filled: true,
-                      fillColor: Color.fromARGB(200, 255, 187, 119),
+                      fillColor: Color.fromARGB(200, 180, 180, 200),
                       suffixIcon: Visibility(
                         visible: crossVisible2,
                         child: IconButton(
-                          icon: Icon(Icons.clear,color: Colors.white),
+                          icon: Icon(Icons.clear,color: Colors.black),
                           onPressed: () {
                             passwordcontroller.clear();
                           },
@@ -212,72 +212,72 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  
+
                   const SizedBox(height: 5,),
 
-                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ForgotPasswordPage(),
-                                  )
-                              );
-                            },
-                            child: Text(
-                              'Forgot Password?',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontFamily: 'signika'
-
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                  const SizedBox(height: 25,),
-
-                     MyButton(
-                      text: 'Sign in',
-                      onTap: ()=>signUserIn(context),
-                    ),
-
-                  const SizedBox(height: 25,),
-
-
-                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          'Don\'t have an account?',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'signika',
-                            fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ForgotPasswordPage(),
+                                )
+                            );
+                          },
+                          child: Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontFamily: 'signika'
+
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 4,),
-                        GestureDetector(
-                          onTap: widget.ontap,
-                          child: Text(
-                            'Register now',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'signika',
-                            ),
-                          ),
-                        )
                       ],
                     ),
+                  ),
+
+                  const SizedBox(height: 25,),
+
+                  MyButton(
+                    text: 'Sign in',
+                    onTap: ()=>signUserIn(context),
+                  ),
+
+                  const SizedBox(height: 25,),
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Don\'t have an account?',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'signika',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 4,),
+                      GestureDetector(
+                        onTap: widget.ontap,
+                        child: Text(
+                          'Register now',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'signika',
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
 
                 ],
               ),

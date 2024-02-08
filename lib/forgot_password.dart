@@ -28,7 +28,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             return AlertDialog(
               backgroundColor: Colors.white,
                 content: Text('Password reset link sent to your email. '
-                ,style: TextStyle(color: Colors.deepOrange,fontSize: 20,fontFamily: 'signika'),),
+                ,style: TextStyle(color: Colors.black,fontSize: 20,fontFamily: 'signika'),),
             );
 
           }
@@ -50,7 +50,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orangeAccent,
+      backgroundColor: Colors.grey[400],
       appBar: PreferredSize(
 
 
@@ -73,7 +73,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500,color: Colors.white,fontFamily: 'signika')
             ),
             centerTitle: true,
-            backgroundColor: Colors.orange,
+            backgroundColor: Colors.grey[700],
           )
       ),
       body: Column(
@@ -141,7 +141,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   style: TextStyle(fontSize: 20,color: Colors.white),
                 ),
                 filled: true,
-                fillColor: Color.fromARGB(200, 255, 187, 119),
+                fillColor: Color.fromARGB(200, 180, 180, 200),
                 suffixIcon: Visibility(
                   visible: crossVisible1,
                   child: IconButton(
@@ -157,7 +157,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           MaterialButton(
               onPressed: passwordReset,
               child:Text('Reset Password',style: TextStyle(color: Colors.white,fontFamily: 'signika',fontWeight: FontWeight.bold)),
-              color: Colors.orange,
+              color: Colors.black,
           ),
 
         ],

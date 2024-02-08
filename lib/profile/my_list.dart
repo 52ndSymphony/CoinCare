@@ -27,10 +27,10 @@ class MylistTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(sectionName),
-              IconButton(onPressed:(){},icon:Icon(Icons.settings)),
+              //IconButton(onPressed:(){},icon:Icon(Icons.settings)),
             ],
           ),
-          Text(text,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)
+          Text(text,style: TextStyle(color: Colors.black,fontSize:30.0,fontWeight: FontWeight.bold),)
 
         ],
       ),

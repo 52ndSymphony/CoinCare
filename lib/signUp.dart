@@ -106,16 +106,16 @@ class _RegisterPageState extends State<RegisterPage> {
             toolbarHeight: 220,
             title: const Text(
                 'SIGN UP',
-                style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500,color: Colors.white,fontFamily: 'signika')
+                style: TextStyle(fontSize: 34,fontWeight: FontWeight.w500,color: Colors.white,fontFamily: 'signika')
             ),
             centerTitle: true,
-            backgroundColor: Colors.orange,
+            backgroundColor: Colors.grey[400],
           )
       ),
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/logi.jpg'),
+              image: AssetImage('assets/login.jpg'),
               fit: BoxFit.cover,
             )
         ),
@@ -158,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.person_2_outlined,color: Colors.white),
+                      icon: Icon(Icons.person_2_outlined,color: Colors.black),
                       // hintText: "Enter Email",
                       enabledBorder:  OutlineInputBorder(
                         borderRadius:  BorderRadius.circular(15.0),
@@ -175,11 +175,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: TextStyle(fontSize: 20,color: Colors.white),
                       ),
                       filled: true,
-                      fillColor: Color.fromARGB(200, 255, 187, 119),
+                      fillColor: Color.fromARGB(200, 180, 180, 200),
                       suffixIcon: Visibility(
                         visible: crossVisible1,
                         child: IconButton(
-                          icon: Icon(Icons.clear,color: Colors.white),
+                          icon: Icon(Icons.clear,color: Colors.black),
                           onPressed: () {
                             nameController.clear();
                           },
@@ -222,7 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.person_2_outlined,color: Colors.white),
+                      icon: Icon(Icons.person_2_outlined,color: Colors.black),
                       // hintText: "Enter Email",
 
                       enabledBorder:  OutlineInputBorder(
@@ -240,11 +240,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: TextStyle(fontSize: 20,color: Colors.white),
                       ),
                       filled: true,
-                      fillColor: Color.fromARGB(200, 255, 187, 119),
+                      fillColor: Color.fromARGB(200, 180, 180, 200),
                       suffixIcon: Visibility(
                         visible: crossVisible2,
                         child: IconButton(
-                          icon: Icon(Icons.clear,color: Colors.white,),
+                          icon: Icon(Icons.clear,color: Colors.black,),
                           onPressed: () {
                             emailController.clear();
                           },
@@ -287,7 +287,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.person_2_outlined,color: Colors.white),
+                      icon: Icon(Icons.person_2_outlined,color: Colors.black),
                       // hintText: "Enter Email",
                       enabledBorder:  OutlineInputBorder(
                         borderRadius:  BorderRadius.circular(15.0),
@@ -304,11 +304,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: TextStyle(fontSize: 20,color: Colors.white),
                       ),
                       filled: true,
-                      fillColor: Color.fromARGB(200, 255, 187, 119),
+                      fillColor: Color.fromARGB(200, 180, 180, 200),
                       suffixIcon: Visibility(
                         visible: crossVisible1,
                         child: IconButton(
-                          icon: Icon(Icons.clear,color: Colors.white),
+                          icon: Icon(Icons.clear,color: Colors.black),
                           onPressed: () {
                             balanceController.clear();
                           },
@@ -350,7 +350,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.key_outlined,color: Colors.white,),
+                      icon: Icon(Icons.key_outlined,color: Colors.black,),
                       // hintText: "Enter Email",
                       enabledBorder:  OutlineInputBorder(
                         borderRadius:  BorderRadius.circular(15.0),
@@ -367,11 +367,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: TextStyle(fontSize: 20,color: Colors.white),
                       ),
                       filled: true,
-                      fillColor: Color.fromARGB(200, 255, 187, 119),
+                      fillColor: Color.fromARGB(200, 180, 180, 200),
                       suffixIcon: Visibility(
                         visible: crossVisible3,
                         child: IconButton(
-                          icon: Icon(Icons.clear,color: Colors.white,),
+                          icon: Icon(Icons.clear,color: Colors.black,),
                           onPressed: () {
                             passwordController.clear();
                           },
@@ -414,7 +414,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.key_off_rounded,color: Colors.white),
+                      icon: Icon(Icons.key_off_rounded,color: Colors.black),
                       // hintText: "Enter Email",
                       enabledBorder:  OutlineInputBorder(
                         borderRadius:  BorderRadius.circular(15.0),
@@ -431,11 +431,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: TextStyle(fontSize: 20,color: Colors.white),
                       ),
                       filled: true,
-                      fillColor: Color.fromARGB(200, 255, 187, 119),
+                      fillColor: Color.fromARGB(200, 180, 180, 200),
                       suffixIcon: Visibility(
                         visible: crossVisible4,
                         child: IconButton(
-                          icon: Icon(Icons.clear,color: Colors.white,),
+                          icon: Icon(Icons.clear,color: Colors.black,),
                           onPressed: () {
                             confirmPassController.clear();
                           },
